@@ -77,9 +77,40 @@ def fib_r(num)
     fib1 << fib1[-1] + fib1[-2]
 end
 
-p fib_r(0)
-p fib_r(1)
-p fib_r(2)
-p fib_r(20)
-p fib_r(5)
-p fib_r(8)
+# p fib_r(0)
+# p fib_r(1)
+# p fib_r(2)
+# p fib_r(20)
+# p fib_r(5)
+# p fib_r(8)
+
+def bsearch(arr, target)
+    return nil if !arr.include?(target)
+    return 0 if target == 1
+
+
+    mid = arr.length / 2
+    less = arr[0...mid]
+    more = arr[mid..-1]
+
+    index_count = mid
+
+    if arr[mid] < target
+        index_count += bsearch(more, target)
+        
+    elsif arr[mid] > target
+        index_count -= bsearch(less, target) 
+    end
+
+    index_count
+
+end
+
+
+p bsearch([1, 2, 3], 1) # => 0
+p bsearch([2, 3, 4, 5], 3) # => 1
+p bsearch([2, 4, 6, 8, 10], 6) # => 2
+p bsearch([1, 3, 4, 5, 9], 5) # => 3
+p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
