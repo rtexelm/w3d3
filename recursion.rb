@@ -1,1 +1,85 @@
-fjsdklfjsdkfsdjf
+def exp(base, num)
+
+    return 1 if num == 0
+    return base if num == 1
+
+    base * exp(base, num -1)
+
+end
+
+
+def exp2(base, num)
+    return 1 if num == 0
+    return base if num == 1
+
+    even_func = exp(base, num / 2) ** 2
+    odd_func = base * (exp(base, (num -1) / 2) ** 2)
+
+    if num.even?
+        return even_func * even_func
+    else
+        return odd_func * odd_func
+    end
+
+end
+
+
+# p exp2(1, 0)
+# p exp2(1, 1)
+# p exp2(1, 2)
+# p exp2(2, 0)
+# p exp2(2, 1)
+# p exp2(2, 3)
+# p exp2(2, 256)
+
+
+class Array
+    def deep_dup
+        return [] if self.length == 0
+        # return self if !self[0].is_a?
+
+        new = []
+
+        self.each do |ele|
+            new << ele if !ele.is_a?  
+            ele.deep_dup 
+        end
+        new
+    end
+end
+
+
+# arr = [1,[2],[3, [4]]]
+# p arr.object_id 
+
+# p Array.new(arr).object_id
+
+def fib_i(num)
+    [1, 1].take(num) if num <= 2
+
+    fib_arr = [1, 1]
+    (2..num).each do |n|
+        fib_arr << fib_arr[-2] + fib_arr[-1]
+    end
+    fib_arr
+end
+
+# p fib_i(0)
+# p fib_i(1)
+# p fib_i(2)
+# p fib_i(10)
+# p fib_i(5)
+# p fib_i(8)
+
+def fib_r(num)
+    return [1, 1].take(num) if num <= 2
+    fib1 = fib_r(num -1)
+    fib1 << fib1[-1] + fib1[-2]
+end
+
+p fib_r(0)
+p fib_r(1)
+p fib_r(2)
+p fib_r(20)
+p fib_r(5)
+p fib_r(8)
