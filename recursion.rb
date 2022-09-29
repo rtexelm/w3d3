@@ -86,7 +86,7 @@ end
 
 def bsearch(arr, target)
     return nil if !arr.include?(target)
-    return 0 if target == 1
+    # return 0 if target == 1
 
 
     mid = arr.length / 2
@@ -99,7 +99,7 @@ def bsearch(arr, target)
         index_count += bsearch(more, target)
         
     elsif arr[mid] > target
-        index_count -= bsearch(less, target) 
+        index_count = bsearch(less, target) 
     end
 
     index_count
@@ -107,10 +107,26 @@ def bsearch(arr, target)
 end
 
 
-p bsearch([1, 2, 3], 1) # => 0
-p bsearch([2, 3, 4, 5], 3) # => 1
-p bsearch([2, 4, 6, 8, 10], 6) # => 2
-p bsearch([1, 3, 4, 5, 9], 5) # => 3
-p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
-p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
-p bsearch([1, 2, 3, 4, 5, 7], 6) # => nil
+# p bsearch([1, 2, 3], 1) # => 0
+# p bsearch([2, 3, 4, 5], 3) # => 1
+# p bsearch([2, 4, 6, 8, 10], 6) # => 2
+# p bsearch([1, 3, 4, 5, 9], 5) # => 3
+# p bsearch([1, 2, 3, 4, 5, 6], 6) # => 5
+# p bsearch([1, 2, 3, 4, 5, 6], 0) # => nil
+# p bsearch([1, 2, 3, 4, 5, 6, 7 , 8, 9, 10], 6) # => nil
+
+
+def merge_s(arr)
+    return arr if arr.empty?
+    return arr if arr.all?(&:is_a?(Integer))
+
+   
+    mid = arr.size / 2
+    left = arr[0...mid]
+    right = arr[mid..-1]
+    merge_s(left) + merg_s(right)
+
+end
+
+
+p merge_s([38,27,43,3,9,82,10])
